@@ -12,9 +12,8 @@ class Grid:
     distance metric used and get different forms
     of 'discs'
     """
-    def __init__(self, r, k, *size):
+    def __init__(self, r, *size):
         self.r = r
-        self.k = k
 
         self.size = size
         self.dim = len(size)
