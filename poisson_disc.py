@@ -51,7 +51,7 @@ class Grid:
         angs = [random.uniform(0, 2*pi)]
 
         if self.dim > 2:
-            angs.extend([random.uniform(-pi/2, pi/2) for _ in range(self.dim-1)])
+            angs.extend([random.uniform(-pi/2, pi/2) for _ in range(self.dim-2)])
 
         angs[0] = 2*angs[0]
 
