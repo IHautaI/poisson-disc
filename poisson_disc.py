@@ -5,7 +5,7 @@ from itertools import product
 
 class Grid:
     """
-    class for filling a rectangular prism of dimension > 2
+    class for filling a rectangular prism of dimension >= 2
     with poisson disc samples spaced at least r apart
     and k attempts per active sample
     override Grid.distance to change
@@ -161,9 +161,9 @@ class Grid:
         a distance of the given point
         """
         num = 2*int(sqrt(self.dim))*self.dim
-        return [self.cells[tup] for tup in self.cells
-                if self.cell_distance(point, tup) < num and
-                self.cells[tup] != -1]
+        return (self.cells[tup] for tup in self.cells
+                if self.cells[tup] != -1 and
+                self.cell_distance(point, tup) < num)
 
     def update(self, point, index):
         """
