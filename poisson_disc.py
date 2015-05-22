@@ -22,7 +22,7 @@ class Grid:
 
         self.widths = [int(size[k]/self.cell_size) + 1 for k in range(self.dim)]
 
-        nums = product(*[range(self.widths[k]) for k in range(self.dim)])
+        nums = product(*(range(self.widths[k]) for k in range(self.dim)))
 
         self.cells = {num:-1 for num in nums}
         self.samples = []
@@ -47,11 +47,15 @@ class Grid:
         self.r, 2*self.r
         """
 
-        rad = random.uniform(self.r, 2*self.r)
+        rad = random.triangular(self.r, 2*self.r, .3*(2*self.r - self.r))
+             # was random.uniform(self.r, 2*self.r) but I think
+             # this may be closer to the correct distribution
+             # but easier to build
+
         angs = [random.uniform(0, 2*pi)]
 
         if self.dim > 2:
-            angs.extend([random.uniform(-pi/2, pi/2) for _ in range(self.dim-2)])
+            angs.extend(random.uniform(-pi/2, pi/2) for _ in range(self.dim-2))
 
         angs[0] = 2*angs[0]
 
@@ -133,14 +137,14 @@ class Grid:
         """
         new_point = [point[0] + rad*cos(angs[0]), point[1] + rad*sin(angs[0])]
         if len(angs) > 1:
-            new_point.extend([point[i+1] + rad*sin(angs[i]) for i in range(1,len(angs))])
+            new_point.extend(point[i+1] + rad*sin(angs[i]) for i in range(1,len(angs)))
         return new_point
 
     def cellify(self, point):
         """
         returns the cell in which the point falls
         """
-        return tuple([point[i]//self.cell_size for i in range(self.dim)])
+        return tuple(point[i]//self.cell_size for i in range(self.dim))
 
     def distance(self, tup1, tup2):
         """
