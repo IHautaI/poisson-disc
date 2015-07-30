@@ -1,7 +1,7 @@
 # poisson-disc
 
 An implementation of poisson-disc sampling with rejection based on the paper linked
-at the top of the page.
+at the top of the page.  Check poisson_disc.ipynb for examples and plots.
 
 I'm not using a quadtree.  For a faster 2D version you probably should.
 
