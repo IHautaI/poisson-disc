@@ -154,20 +154,19 @@ class Grid:
 
     def cell_distance(self, tup1, tup2):
         """
-        returns the sum of the absolute differences
-        between tuple entries
+        returns true if the L1 distance is less than 2
+        for the two tuples
         """
-        return sum(abs(tup1[k]-tup2[k]) for k in range(self.dim))
+        return sum(abs(tup1[k]-tup2[k]) for k in range(self.dim)) < 2
 
-    def neighbors(self, point):
+    def neighbors(self, cell):
         """
         finds all occupied cells within
         a distance of the given point
         """
-        num = 2*int(sqrt(self.dim))*self.dim
         return (self.cells[tup] for tup in self.cells
                 if self.cells[tup] != -1 and
-                self.cell_distance(point, tup) < num)
+                self.cell_distance(cell, tup))
 
     def update(self, point, index):
         """
