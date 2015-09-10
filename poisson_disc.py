@@ -157,7 +157,7 @@ class Grid:
         returns true if the L1 distance is less than 2
         for the two tuples
         """
-        return sum(abs(tup1[k]-tup2[k]) for k in range(self.dim)) < 2
+        return sum(abs(tup1[k]-tup2[k]) for k in range(self.dim)) <= 2
 
     def neighbors(self, cell):
         """
